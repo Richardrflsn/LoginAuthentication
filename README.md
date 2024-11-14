@@ -8,7 +8,6 @@ This project is a full authentication system built using **Laravel** as the back
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [License](#license)
 
 ## Features
 
@@ -17,6 +16,11 @@ This project is a full authentication system built using **Laravel** as the back
 - **Secure API Authentication**: Protects routes with Laravel Sanctum for managing sessions.
 - **Notifications**: Uses Vue3 Notifications for error and success messages.
 - **Logout**: Users can securely log out of their accounts.
+
+## Preview
+<img width="640" alt="Screenshot 2024-11-14 at 21 54 39" src="https://github.com/user-attachments/assets/daa615bf-a4a8-4fca-951f-883783b57710">
+<img width="640" alt="Screenshot 2024-11-14 at 21 54 55" src="https://github.com/user-attachments/assets/7fd61857-a938-481d-83c7-909a62de9a51">
+<img width="640" alt="Screenshot 2024-11-14 at 21 55 27" src="https://github.com/user-attachments/assets/eee4a50c-0715-4ffd-a1ef-876dac96db9f">
 
 ## Getting Started
 
@@ -36,25 +40,22 @@ To run this project locally, follow these steps.
 
    ```bash
    git clone https://github.com/Richardrflsn/LoginAuthentication.git
-   cd laravel-vue-auth
+   cd LoginAuthentication-master
    ```
 2. **Set up the Backend (Laravel):**
    - Install dependencies:
    ```bash
-   git clone https://github.com/Richardrflsn/LoginAuthentication.git
    cd laravelbreezeapi
    ```
-   - Copy the .env.example to .env and configure your environment settings, especially the database configuration:
+   - Open the .env file in the root directory of the Laravel project. Find the database configuration section.
+   - Change the database connection to MySQL by replacing DB_CONNECTION=sqlite with the following:
    ```bash
-    cp .env.example .env
-   ```
-   - Generate the application key:
-   ```bash
-    php artisan key:generate
-   ```
-    - Run database migrations:
-   ```bash
-    php artisan migrate
+      DB_CONNECTION=mysql
+      DB_HOST=127.0.0.1
+      DB_PORT=3306
+      DB_DATABASE=laravelbreezeapi
+      DB_USERNAME=root
+      DB_PASSWORD=
    ```
    - Install Laravel Sanctum for API authentication:
    ```bash
