@@ -16,8 +16,8 @@ export const authStore = defineStore("auth", {
         },
 
         async getUser() {
-            const data = await axios.get('/api/user');
-            this.authUser = data.data;
+            const response = await axios.get('/api/users');
+            this.authUser = response.data.result;
         },
 
         async logOut() {

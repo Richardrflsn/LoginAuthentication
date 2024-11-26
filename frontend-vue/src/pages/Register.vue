@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="col-md-6 m-auto">
-            <h1>Login Page</h1>
+            <h1>Register Page</h1>
 
             <div class="my-3" style="color: red;">
                 {{ errorMessage }}

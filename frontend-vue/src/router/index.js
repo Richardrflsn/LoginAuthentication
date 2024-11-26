@@ -28,6 +28,16 @@ const routes = [
         name: 'PasswordReset',
         component: () => import('../pages/ResetPassword.vue')
     },
+    {
+        path: '/create-user/',
+        name: 'CreateUser',
+        component: () => import('../pages/user/FormUser.vue')
+    },
+    {
+        path: '/edit-user/:id',
+        name: 'EditUser',
+        component: () => import('../pages/user/FormEditUser.vue')
+    },
 ];
 
 const router = createRouter({
