@@ -48,6 +48,9 @@ To run this project locally, follow these steps.
    cd laravelbreezeapi
    ```
    - Open the .env file in the root directory of the Laravel project. Find the database configuration section.
+   ```bash
+     cp .env.example .env
+   ```
    - Change the database connection to MySQL by replacing DB_CONNECTION=sqlite with the following:
    ```bash
       DB_CONNECTION=mysql
