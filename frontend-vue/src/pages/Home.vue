@@ -23,8 +23,8 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>
-                            <img :src="`/storage/images/${user.profile_photo_path}`" alt="Profile Image" width="100"
-                                height="100" />
+                            <img :src="user.profile_photo_path || 'default-image-path.png'" alt="Profile Image"
+                                width="100" height="100" />
                         </td>
                         <td>
                             <router-link :to="`/edit-user/${user.id}`">
@@ -53,10 +53,6 @@ const useAuth = authStore(); // Initialize the store instance
 onMounted(async () => {
     await useAuth.getUser();  // Fetch the user data on component mount
 });
-
-const getImageUrl = (imagePath) => {
-    return `/storage/${imagePath}`; // Assuming image is stored in public/storage folder
-}
 
 const clickDelete = (id, index) => {
     Swal.fire({

@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
-            'profile_photo_path' => ['nullable','mimes:png','max:5048']
+            'profile_photo_path' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }
