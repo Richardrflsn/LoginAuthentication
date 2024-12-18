@@ -11,6 +11,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search'); // Retrieve the search query from the request
+        $perPage = $request->input('per_page', 10);
 
         $books = Books::query()
             ->when($search, function ($query, $search) {
@@ -18,7 +19,7 @@ class BookController extends Controller
                 ->orWhere('author', 'LIKE', "%{$search}%")
                 ->orWhere('isbn', 'LIKE', "%{$search}%");
             })
-            ->get(); // Retrieve all records
+            ->paginate($perPage);
 
         return response()->json([
             'success' => true,

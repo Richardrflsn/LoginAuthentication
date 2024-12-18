@@ -9,6 +9,11 @@ const routes = [
         component: Home,
     },
     {
+        path: '/books',
+        name: 'Books',
+        component: () => import('../pages/Books.vue'),
+    },
+    {
         path: '/login',
         name: 'Login',
         component: () => import('../pages/Login.vue')
@@ -37,6 +42,21 @@ const routes = [
         path: '/edit-user/:id',
         name: 'EditUser',
         component: () => import('../pages/user/FormEditUser.vue')
+    },
+    {
+        path: '/create-book',
+        name: 'CreateBook',
+        component: () => import('../pages/book/FormCreateBook.vue')
+    },
+    {
+        path: '/edit-book/:id',
+        name: 'EditBook',
+        component: () => import('../pages/book/FormEditBook.vue')
+    },
+    {
+        path: '/book-details/:id',
+        name: 'BookDetails',
+        component: () => import('../components/BookDetails.vue')
     },
 ];
 
