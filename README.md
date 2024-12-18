@@ -1,6 +1,6 @@
-# Laravel + Vue.js Login & Register Authentication Project
+# Oracle Library Authentication System
 
-This project is a full authentication system built using **Laravel** as the backend and **Vue.js** as the frontend. It includes features like user registration, login, logout, and authenticated routes, using **Laravel Sanctum** for secure API authentication.
+This project is a web application that implements a full authentication system for the Oracle Library, built using **Laravel** as the backend and **Vue.js** as the frontend. It includes features like user registration, login, logout, authenticated routes, and a CRUD system for managing books, using **Laravel Sanctum** for secure API authentication.
 
 ## Table of Contents
 
@@ -11,20 +11,23 @@ This project is a full authentication system built using **Laravel** as the back
 
 ## Features
 
-- **User Registration**: New users can register, and email verification is supported.
+- **User Registration**: New users can register, with email verification support.
 - **User Login**: Authenticates users with email and password.
-- **Secure API Authentication**: Protects routes with Laravel Sanctum for managing sessions.
+- **Secure API Authentication**: Protects routes with Laravel Sanctum for session management.
 - **Notifications**: Uses Vue3 Notifications for error and success messages.
-- **Logout**: Users can securely log out of their accounts.
+- **Logout**: Enables users to securely log out.
+- **CRUD for Books**: Users can create, read, update, and delete books in the library system, with server-side validation and real-time updates on the frontend.
 
 ## Preview
-<img width="640" alt="Screenshot 2024-11-14 at 21 54 39" src="https://github.com/user-attachments/assets/daa615bf-a4a8-4fca-951f-883783b57710">
-<img width="640" alt="Screenshot 2024-11-14 at 21 54 55" src="https://github.com/user-attachments/assets/7fd61857-a938-481d-83c7-909a62de9a51">
-<img width="640" alt="Screenshot 2024-11-14 at 21 55 27" src="https://github.com/user-attachments/assets/eee4a50c-0715-4ffd-a1ef-876dac96db9f">
+
+<img width="520" alt="Screenshot 2024-12-18 at 12 53 00" src="https://github.com/user-attachments/assets/48e8429f-1c05-4a69-88b0-40ab1802457e" />
+<img width="520" alt="Screenshot 2024-12-18 at 12 53 13" src="https://github.com/user-attachments/assets/755b9923-d847-4202-bce2-a33113910745" />
+<img width="520" alt="Screenshot 2024-12-18 at 12 53 34" src="https://github.com/user-attachments/assets/aab4339a-c3c6-4ff3-90bf-8b9e7378b16a" />
+<img width="520" alt="Screenshot 2024-12-18 at 12 53 43" src="https://github.com/user-attachments/assets/e672321a-b1f6-4e16-8cc2-1a7e83bfa5c4" />
 
 ## Getting Started
 
-To run this project locally, follow these steps.
+Follow these steps to set up and run the project locally.
 
 ### Prerequisites
 
@@ -39,49 +42,67 @@ To run this project locally, follow these steps.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Richardrflsn/LoginAuthentication.git
-   cd LoginAuthentication-master
+   git clone https://github.com/Richardrflsn/OracleLibrary.git
+   cd OracleLibrary
    ```
+
 2. **Set up the Backend (Laravel):**
-   - Install dependencies:
-   ```bash
-   cd laravelbreezeapi
-   ```
-   - Open the .env file in the root directory of the Laravel project. Find the database configuration section.
-   ```bash
+
+   - Navigate to the backend folder:
+     ```bash
+     cd laravelbreezeapi
+     ```
+   - Copy the environment configuration file:
+     ```bash
      cp .env.example .env
-   ```
-   - Change the database connection to MySQL by replacing DB_CONNECTION=sqlite with the following:
-   ```bash
-      DB_CONNECTION=mysql
-      DB_HOST=127.0.0.1
-      DB_PORT=3306
-      DB_DATABASE=laravelbreezeapi
-      DB_USERNAME=root
-      DB_PASSWORD=
-   ```
+     ```
+   - Update the `.env` file with your database credentials:
+     ```env
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=oracle_library
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+   - Install Laravel dependencies and migrate the database:
+     ```bash
+     composer install
+     php artisan migrate
+     ```
    - Install Laravel Sanctum for API authentication:
-   ```bash
-    composer require laravel/sanctum
-    php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-    php artisan migrate
-   ```
+     ```bash
+     composer require laravel/sanctum
+     php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+     php artisan migrate
+     ```
+
 3. **Set up the Frontend (Vue.js):**
+
    - Navigate to the frontend folder:
-   ```bash
-    cd frontend-vue
-   ```
+     ```bash
+     cd frontend-vue
+     ```
    - Install frontend dependencies:
-   ```bash
-    npm install
-   ```
-4. Run the Development Servers:
-    - Start the Laravel server:
-   ```bash
-   php artisan serve
-   ```
+     ```bash
+     npm install
+     ```
+
+4. **Run the Development Servers:**
+
+   - Start the Laravel server:
+     ```bash
+     php artisan serve
+     ```
    - Start the Vue.js development server:
-   ```bash
-    npm run dev
-   ```
-5. Access the application by visiting http://localhost:3000.
+     ```bash
+     npm run dev
+     ```
+
+5. **Access the application:**
+
+   Visit [http://localhost:3000](http://localhost:3000) in your web browser.
+
+---
+
+For further information or contribution, please refer to the [documentation](https://github.com/Richardrflsn/OracleLibraryAuth/docs).
