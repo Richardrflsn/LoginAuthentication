@@ -53,7 +53,7 @@ const fetchBooks = async (page = 1, searchQuery = '') => {
         const response = await axios.get('/api/books', {
             params: {
                 page: page,
-                per_page: 5,
+                per_page: 6,
                 search: searchQuery,
             },
         });

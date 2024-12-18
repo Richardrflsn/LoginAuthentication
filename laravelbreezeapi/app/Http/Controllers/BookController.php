@@ -127,12 +127,14 @@ class BookController extends Controller
                 ]);
 
                 // Update the image URL and public ID
-                $book->image = $uploadedFile->getSecurePath();
-                $book->image_public_id = $uploadedFile->getPublicId();
+                $uploadedFileUrl = $uploadedFile->getSecurePath();
+                $publicId = $uploadedFile->getPublicId();
             }
 
             $book->title = $request->title ?? $book->title;
             $book->author = $request->author ?? $book->author;
+            $book->image = $uploadedFileUrl; // Store the Cloudinary URL
+            $book->image_public_id = $publicId; // Store the public ID
             $book->description = $request->description ?? $book->description;
             $book->publish_date = $request->publish_date ?? $book->publish_date;
             $book->isbn = $request->isbn ?? $book->isbn;

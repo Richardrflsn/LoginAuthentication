@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="FormControlCover" class="form-label">Cover</label>
-                        <input type="file" class="form-control" id="FormControlCover" @change="onChangeFile">
+                        <input type="file" class="form-control" id="FormControlCover" @change="onChangeImage">
                     </div>
 
                     <div v-if="img || imgPreview">
@@ -62,8 +62,6 @@ import { useRoute, useRouter } from 'vue-router';
 
 const router = useRouter();
 const route = useRoute();
-const img = ref(null);
-const imgPreview = ref(null);
 
 const form = ref({
     title: '',
@@ -74,25 +72,10 @@ const form = ref({
     file: '',
 });
 
+const imgPreview = ref(null);
+const img = ref(null);
 const errorMessage = ref('');
 const isProcess = ref(false);
-
-const onChangeFile = (event) => {
-    if (!event.target.files || event.target.files.length === 0) return;
-    img.value = event.target.files[0];
-
-    if (!/\.(jpe?g|png|gif)$/i.test(img.value.name)) {
-        alert("Invalid file type. Please select a JPEG, PNG, or GIF image.");
-        img.value = null;
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        imgPreview.value = reader.result;
-    });
-    reader.readAsDataURL(img.value);
-};
 
 onMounted(async () => {
     try {
@@ -123,30 +106,37 @@ onMounted(async () => {
     }
 });
 
+// Handle file input change for the book image
+const onChangeImage = (event) => {
+    // Ensure a file is selected
+    if (!event.target.files || event.target.files.length === 0) {
+        return;
+    }
+
+    // Get the selected file
+    img.value = event.target.files[0];
+
+    // Validate file type (JPEG, PNG, GIF)
+    if (!/\.(jpe?g|png|gif)$/i.test(img.value.name)) {
+        alert("Invalid file type. Please select a JPEG, PNG, or GIF image.");
+        img.value = null;
+        return;
+    }
+
+    // Initialize FileReader to read the file
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        imgPreview.value = reader.result; // Set the preview data
+    });
+
+    // Read the file as a data URL
+    reader.readAsDataURL(img.value);
+};
+
 const submitUpdate = async () => {
     isProcess.value = true;
 
     let imageUrl = imgPreview.value; // Use existing image if no new image is selected
-
-    // If a new image is selected, upload it to Cloudinary
-    if (img.value) {
-        try {
-            const formData = new FormData();
-            formData.append('file', img.value);
-            formData.append('upload_preset', 'ml_default'); // Replace with your upload preset
-
-            // Upload image to Cloudinary
-            const uploadResponse = await axios.post('https://api.cloudinary.com/v1_1/richimage/image/upload', formData);
-            imageUrl = uploadResponse.data.secure_url; // Get the URL of the uploaded image
-
-            console.log("Image uploaded successfully:", imageUrl);
-        } catch (uploadError) {
-            console.error("Error uploading image to Cloudinary:", uploadError);
-            errorMessage.value = 'Failed to upload image. Please try again later.';
-            isProcess.value = false;
-            return;
-        }
-    }
 
     // Prepare the form data for the book update
     const updateFormData = new FormData();
@@ -155,7 +145,9 @@ const submitUpdate = async () => {
     updateFormData.append('isbn', form.value.isbn);
     updateFormData.append('publish_date', form.value.publish_date);
     updateFormData.append('description', form.value.description);
-    updateFormData.append('image', imageUrl); // Use the new image URL
+    if (img.value) {
+        updateFormData.append('image', img.value);
+    }
 
     updateFormData.append('_method', 'put'); // Specify the method override for PUT
 
