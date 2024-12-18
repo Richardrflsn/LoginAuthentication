@@ -25,6 +25,13 @@
                             :placeholder="form.author ? form.author : 'Author name'" v-model="form.author">
                     </div>
                     <div class="mb-3">
+                        <label for="FormControlDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="FormControlDescription" rows="4"
+                            :placeholder="form.description ? form.description : 'Book description'"
+                            v-model="form.description">
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="FormControlIsbn" class="form-label">ISBN</label>
                         <input type="text" class="form-control" id="FormControlIsbn"
                             :placeholder="form.isbn ? form.isbn : 'ISBN'" v-model="form.isbn">

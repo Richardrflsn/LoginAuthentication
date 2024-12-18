@@ -16,8 +16,8 @@ class BookController extends Controller
         $books = Books::query()
             ->when($search, function ($query, $search) {
                 $query->where('title', 'LIKE', "%{$search}%")
-                ->orWhere('author', 'LIKE', "%{$search}%")
-                ->orWhere('isbn', 'LIKE', "%{$search}%");
+                    ->orWhere('author', 'LIKE', "%{$search}%")
+                    ->orWhere('isbn', 'LIKE', "%{$search}%");
             })
             ->paginate($perPage);
 
@@ -114,6 +114,10 @@ class BookController extends Controller
         ]);
 
         try {
+            // Initialize default values for image URL and public ID
+            $uploadedFileUrl = $book->image;
+            $publicId = $book->image_public_id;
+
             // Check if a new image is uploaded
             if ($request->hasFile('image')) {
                 // Delete the old image from Cloudinary
@@ -131,6 +135,7 @@ class BookController extends Controller
                 $publicId = $uploadedFile->getPublicId();
             }
 
+            // Update book details
             $book->title = $request->title ?? $book->title;
             $book->author = $request->author ?? $book->author;
             $book->image = $uploadedFileUrl; // Store the Cloudinary URL
